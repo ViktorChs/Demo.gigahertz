@@ -2377,6 +2377,77 @@
             .cf-dd-chev { transition: none; }
             .cf-reset:active { transform: none; }
         }
+
+        /* ===== Mobile nav drawer ===== */
+        .md-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 65;
+            background: rgba(17, 24, 39, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 220ms cubic-bezier(0.23, 1, 0.32, 1), visibility 0s linear 220ms;
+        }
+        .md-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 220ms cubic-bezier(0.23, 1, 0.32, 1), visibility 0s linear 0s;
+        }
+        .md-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: min(300px, 85vw);
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            box-shadow: 24px 0 60px rgba(17, 24, 39, 0.22);
+            transform: translateX(-100%);
+            transition: transform 280ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .md-overlay.is-open .md-panel { transform: translateX(0); }
+        .md-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 18px 14px;
+            border-bottom: 1px solid #eef0f3;
+        }
+        .md-head span { font-weight: 800; font-size: 14px; color: #111827; }
+        .md-close {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            background: #f3f4f6;
+            border-radius: 999px;
+            color: #4b5563;
+            cursor: pointer;
+            transition: background-color 140ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .md-close:hover { background: #e5e7eb; }
+        .md-close:active { transform: scale(0.95); }
+        .md-links { display: flex; flex-direction: column; padding: 8px; }
+        .md-links a {
+            display: block;
+            padding: 13px 12px;
+            border-radius: 0.75rem;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            text-decoration: none;
+            transition: background-color 140ms ease, color 140ms ease;
+        }
+        .md-links a:hover { background: #f5f3ff; color: #7c3aed; }
+        .md-links a:active { background: #ede9fe; }
     </style>
 </head>
 <body class="w-full relative">
@@ -2426,6 +2497,9 @@
         </div>
 
         <div class="flex items-center space-x-2 sm:space-x-3 text-gray-800">
+            <button id="navBurger" class="lg:hidden p-2 rounded-full hover:bg-gray-200/60 transition-colors" title="Menú" aria-label="Abrir menú">
+                <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+            </button>
             <button id="navCart" class="p-2 rounded-full hover:bg-gray-200/60 transition-colors relative" title="Carrito">
                 <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                 <span id="cartCount" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center shadow-md" hidden>0</span>
@@ -2982,6 +3056,25 @@
     <button id="backToTop" class="btt" type="button" aria-label="Volver arriba">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></svg>
     </button>
+
+<!-- Mobile Nav Drawer -->
+    <div id="navMenu" class="md-overlay" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+        <div class="md-panel">
+            <div class="md-head">
+                <span>GIGAHERTZ STORE</span>
+                <button id="nmClose" class="md-close" title="Cerrar menú" aria-label="Cerrar menú">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+            <nav class="md-links">
+                <a href="index.html#inicio">Inicio</a>
+                <a href="catalogo.html">Productos</a>
+                <a href="index.html#productos" class="js-cat-nav">Categorias</a>
+                <a href="index.html#ubicacion">Ubicación</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+        </div>
+    </div>
 
 <!-- Cart Drawer -->
     <div id="cartDrawer" class="cd-overlay" role="dialog" aria-modal="true" aria-labelledby="cdTitle">
@@ -3804,5 +3897,20 @@
         })();
     </script>
     <script src="categorias.js"></script>
+    <script>
+        (function () {
+            var menu = document.getElementById('navMenu');
+            var burger = document.getElementById('navBurger');
+            var closeBtn = document.getElementById('nmClose');
+            function shut() { menu.classList.remove('is-open'); }
+            burger.addEventListener('click', function () { menu.classList.add('is-open'); });
+            closeBtn.addEventListener('click', shut);
+            menu.addEventListener('click', function (e) { if (e.target === menu) shut(); });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menu.classList.contains('is-open')) shut();
+            });
+            menu.querySelectorAll('.md-links a').forEach(function (a) { a.addEventListener('click', shut); });
+        })();
+    </script>
 </body>
 </html>
