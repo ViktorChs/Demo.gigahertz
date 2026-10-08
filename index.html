@@ -296,6 +296,269 @@
             .faq-head { transform: none !important; }
         }
 
+        /* ===== Cart badge ===== */
+        @keyframes cartBadgePop {
+            0% { transform: scale(1); }
+            45% { transform: scale(1.35); }
+            100% { transform: scale(1); }
+        }
+        #cartCount.pop { animation: cartBadgePop 240ms var(--pm-ease-out); }
+        @media (prefers-reduced-motion: reduce) {
+            #cartCount.pop { animation: none; }
+        }
+
+        /* ===== Cart drawer ===== */
+        .cd-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 70;
+            background: rgba(17, 24, 39, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 220ms var(--pm-ease-out), visibility 0s linear 220ms;
+        }
+        .cd-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 220ms var(--pm-ease-out), visibility 0s linear 0s;
+        }
+        .cd-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: min(430px, 100%);
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            box-shadow: -24px 0 60px rgba(17, 24, 39, 0.22);
+            transform: translateX(100%);
+            transition: transform 280ms var(--pm-ease-out);
+        }
+        .cd-overlay.is-open .cd-panel { transform: translateX(0); }
+        .cd-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 22px 22px 16px;
+            border-bottom: 1px solid #eef0f3;
+        }
+        .cd-head h3 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cd-count {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #7c3aed;
+            background: #f5f3ff;
+            border: 1px solid #ede9fe;
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+        .cd-close {
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 999px;
+            background: #f3f4f6;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background-color 150ms ease, transform 150ms var(--pm-ease-out);
+        }
+        .cd-close:hover { background: #e5e7eb; color: #111827; }
+        .cd-close:active { transform: scale(0.94); }
+        .cd-list { flex: 1; overflow-y: auto; padding: 4px 22px; }
+        .cd-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #eef0f3;
+        }
+        .cd-item:last-child { border-bottom: 0; }
+        .cd-thumb {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            border-radius: 0.8rem;
+            object-fit: cover;
+            background: #f3f4f6;
+            border: 1px solid #f3f4f6;
+        }
+        .cd-main { flex: 1; min-width: 0; }
+        .cd-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .cd-unit { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+        .cd-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; }
+        .cd-total-i { font-size: 13px; font-weight: 800; color: #7c3aed; white-space: nowrap; }
+        .cd-remove {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 999px;
+            background: #fef2f2;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background-color 140ms ease, transform 140ms var(--pm-ease-out);
+        }
+        .cd-remove:hover { background: #fee2e2; }
+        .cd-remove:active { transform: scale(0.9); }
+        .qty {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #e5e7eb;
+            border-radius: 999px;
+            background: #ffffff;
+            overflow: hidden;
+        }
+        .qty button {
+            width: 28px;
+            height: 28px;
+            border: 0;
+            background: none;
+            color: #6d28d9;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 140ms ease, transform 140ms var(--pm-ease-out);
+        }
+        .qty button:hover { background: #f5f3ff; }
+        .qty button:active { transform: scale(0.9); }
+        .qty span { min-width: 28px; text-align: center; font-size: 12.5px; font-weight: 700; color: #111827; }
+        .cd-empty { text-align: center; padding: 54px 10px; }
+        .cd-empty p { color: #6b7280; font-size: 13.5px; font-weight: 600; margin: 14px 0 4px; }
+        .cd-empty small { color: #9ca3af; font-size: 12px; }
+        .cd-foot { border-top: 1px solid #eef0f3; background: #faf9ff; padding: 16px 22px 22px; }
+        .cd-totalrow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+        .cd-totalrow span { font-size: 13px; color: #6b7280; font-weight: 600; }
+        .cd-totalrow strong { font-size: 20px; font-weight: 800; color: #7c3aed; }
+        .cd-checkout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 999px;
+            background: #7c3aed;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 24px rgba(124, 58, 237, 0.3);
+            transition: transform 160ms var(--pm-ease-out), background-color 160ms ease;
+        }
+        .cd-checkout:active { transform: scale(0.97); }
+        .cd-keep {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            border: 0;
+            background: none;
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 150ms ease;
+        }
+        .cd-keep:hover { color: #111827; }
+        @media (hover: hover) and (pointer: fine) {
+            .cd-checkout:hover { background: #6d28d9; }
+        }
+
+        /* ===== Back to top ===== */
+        .btt {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 55;
+            width: 46px;
+            height: 46px;
+            border: 0;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(124, 58, 237, 0.4);
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity 220ms var(--pm-ease-out), transform 220ms var(--pm-ease-out);
+        }
+        .btt.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .btt:active { transform: scale(0.94); }
+        @media (prefers-reduced-motion: reduce) {
+            .cd-panel { transition: none; }
+            .btt { transition: opacity 150ms linear; transform: none !important; }
+        }
+
+        /* ===== Page loader ===== */
+        .pl {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transition: opacity 320ms cubic-bezier(0.23, 1, 0.32, 1), visibility 0s linear 320ms;
+        }
+        .pl.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+        .pl-logo { width: 160px; height: 160px; object-fit: contain; }
+        .pl-ring {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 4px solid #ede9fe;
+            border-top-color: #7c3aed;
+            animation: plSpin 800ms linear infinite;
+        }
+        @keyframes plSpin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .pl-ring { animation: none; opacity: 0.45; }
+            .pl { transition: opacity 200ms linear, visibility 0s linear 200ms; }
+        }
+
         /* ===== Product Detail Modal ===== */
         :root {
             --pm-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -315,7 +578,7 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 200ms var(--pm-ease-out), visibility 0s linear 180ms;
+            transition: opacity 130ms var(--pm-ease-in), visibility 0s linear 120ms;
         }
         .pm-overlay.is-open {
             opacity: 1;
@@ -323,11 +586,16 @@
             pointer-events: auto;
             transition: opacity 200ms var(--pm-ease-out), visibility 0s linear 0s;
         }
-        .pm-modal {
+        .pm-stage {
             position: relative;
             width: 100%;
             max-width: 1000px;
             height: min(94vh, 960px);
+        }
+        .pm-modal {
+            position: relative;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             background: #ffffff;
             border-radius: 1.5rem;
@@ -343,14 +611,14 @@
             opacity: 1;
         }
         .pm-overlay:not(.is-open) .pm-modal {
-            transition-duration: 180ms, 160ms;
+            transition-duration: 130ms, 110ms;
             transition-timing-function: var(--pm-ease-in);
         }
         .pm-close {
             position: absolute;
             top: 12px;
             right: 12px;
-            z-index: 5;
+            z-index: 10;
             width: 38px;
             height: 38px;
             display: flex;
@@ -472,7 +740,7 @@
             font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: -0.02em;
-            color: #7c3aed;
+            color: #111827;
             line-height: 1.1;
         }
         .pm-switch {
@@ -731,7 +999,35 @@
         }
     </style>
 </head>
-<body class="w-full relative">
+<body id="inicio" class="w-full relative" style="scroll-padding-top: 5rem;">
+
+    <!-- Page loader -->
+    <div id="pageLoader" class="pl" aria-hidden="true">
+        <img src="logo.png" alt="GigaHertz Store" class="pl-logo" onerror="this.src='https://placehold.co/400x400/ffffff/7c3aed?text=GigaHertz'">
+        <div class="pl-ring"></div>
+    </div>
+    <script>
+        (function () {
+            var loader = document.getElementById('pageLoader');
+            var start = Date.now();
+            document.body.style.overflow = 'hidden';
+            function hide() {
+                loader.classList.add('is-done');
+                document.body.style.overflow = '';
+                setTimeout(function () {
+                    if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+                }, 450);
+            }
+            function finish() {
+                var remain = 3000 - (Date.now() - start);
+                if (remain > 0) setTimeout(hide, remain);
+                else hide();
+            }
+            if (document.readyState === 'complete') finish();
+            else window.addEventListener('load', finish);
+        })();
+    </script>
+
 
     <div id="canvasContainer">
         <canvas id="hexCanvas"></canvas>
@@ -790,9 +1086,9 @@
             <button id="likeBtn" class="p-2 rounded-full hover:bg-gray-200/60 transition-colors" title="Me gusta">
                 <svg id="likeIcon" class="w-5 h-5 text-gray-700 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
-            <button class="p-2 rounded-full hover:bg-gray-200/60 transition-colors relative" title="Carrito">
+            <button id="navCart" class="p-2 rounded-full hover:bg-gray-200/60 transition-colors relative" title="Carrito">
                 <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-purple-600 rounded-full"></span>
+                <span id="cartCount" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center shadow-md" hidden>0</span>
             </button>
             <button id="soundToggle" class="p-2 rounded-full hover:bg-gray-200/60 transition-colors" title="Sonido">
                 <svg id="soundIcon" class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
@@ -807,12 +1103,13 @@
     </nav>
 
     <!-- Products Section (25 Products) -->
+    <div id="productos" class="scroll-mt-20"></div>
     <section id="lo-mas-vendido" class="py-16 px-4 sm:px-8 bg-white/80 backdrop-blur-md border-t border-gray-200 relative z-20">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col items-center mb-10 text-center">
                 <span class="text-purple-600 font-bold text-xs uppercase tracking-widest mb-2 bg-purple-50 px-3 py-1 rounded-full border border-purple-100">Tendencias del Mes</span>
                 <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Lo Más Vendido & Catálogo Destacado</h3>
-                <p class="text-gray-500 text-sm mt-1 max-w-md">Los equipos y componentes preferidos por nuestra comunidad en Caracas y toda Venezuela.</p>
+                <p class="text-gray-500 text-sm mt-1 max-w-md">Los equipos y componentes preferidos por nuestra comunidad en zulia y toda Venezuela.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -827,7 +1124,7 @@
                         <p class="product-sub">12GB GDDR6X Gaming</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$799.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$799.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -845,7 +1142,7 @@
                         <p class="product-sub">AM5 8 Nucleos 5.0GHz</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$389.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$389.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -863,7 +1160,7 @@
                         <p class="product-sub">Switches Red Hot-Swap</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$79.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$79.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -881,7 +1178,7 @@
                         <p class="product-sub">IPS 1ms FreeSync Premium</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$269.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$269.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -899,7 +1196,7 @@
                         <p class="product-sub">RGB Micrófono Reducción Ruido</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$65.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$65.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -916,7 +1213,7 @@
                         <p class="product-sub">8GB GDDR6 DLSS 3</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$399.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$399.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -931,7 +1228,7 @@
                         <p class="product-sub">LGA1700 20 Nucleos 5.6GHz</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$409.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$409.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -946,7 +1243,7 @@
                         <p class="product-sub">DDR5 Wi-Fi 6E LGA1700</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$329.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$329.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -961,7 +1258,7 @@
                         <p class="product-sub">Kit 2x16GB 6000MHz CL30</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$119.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$119.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -976,7 +1273,7 @@
                         <p class="product-sub">Lectura hasta 7450 MB/s</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$179.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$179.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -991,7 +1288,7 @@
                         <p class="product-sub">80 Plus Gold Modular</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$139.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$139.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1006,7 +1303,7 @@
                         <p class="product-sub">Vidrio Templado Dual Chamber</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$169.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$169.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1021,7 +1318,7 @@
                         <p class="product-sub">RGB AIO Liquid Cooler</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$189.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$189.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1036,7 +1333,7 @@
                         <p class="product-sub">Mouse Inalámbrico 63g</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$149.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$149.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1051,7 +1348,7 @@
                         <p class="product-sub">Ergonómica Cuero PU</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$549.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$549.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1066,7 +1363,7 @@
                         <p class="product-sub">i7 RTX 4060 16" 240Hz</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$1,399.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$1,399.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1081,7 +1378,7 @@
                         <p class="product-sub">FHD 1ms FreeSync</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$159.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$159.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1096,7 +1393,7 @@
                         <p class="product-sub">USB Condensador RGB</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$159.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$159.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1111,7 +1408,7 @@
                         <p class="product-sub">Carbon Black PC / Console</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$69.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$69.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1126,7 +1423,7 @@
                         <p class="product-sub">Gaming Router AURA RGB</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$199.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$199.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1141,7 +1438,7 @@
                         <p class="product-sub">Respaldo Eléctrico Automático</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$219.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$219.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1156,7 +1453,7 @@
                         <p class="product-sub">1080p Streaming & Calls</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$79.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$79.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1171,7 +1468,7 @@
                         <p class="product-sub">Multifuncional WiFi Botellas</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$249.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$249.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1186,7 +1483,7 @@
                         <p class="product-sub">Reparación PCs y Laptops</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$49.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$49.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1201,7 +1498,7 @@
                         <p class="product-sub">Ventiladores Silenciosos 17"</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span class="text-purple-600 font-extrabold text-base">$35.00</span>
+                        <span class="text-gray-900 font-extrabold text-base">$35.00</span>
                     </div>
                     <button class="absolute bottom-4 right-4 z-20 w-10 h-10 rounded-full bg-purple-50 hover:bg-purple-600 text-purple-600 hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Agregar al carrito"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
                 </div>
@@ -1228,7 +1525,7 @@
                             <span>¿Realizan envíos a toda Venezuela?</span>
                             <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
                         </button>
-                        <div class="faq-panel"><div><p class="faq-answer">Sí. Despachamos a Caracas (24-48h), Valencia y Maracaibo (48-72h) y al resto del país en 3 a 5 días hábiles. El envío es gratis en compras superiores a $100 y también ofrecemos recolección en tienda sin costo adicional.</p></div></div>
+                        <div class="faq-panel"><div><p class="faq-answer">Sí. Despachamos a zulia (24-48h), Valencia y Maracaibo (48-72h) y al resto del país en 3 a 5 días hábiles. El envío es gratis en compras superiores a $100 y también ofrecemos recolección en tienda sin costo adicional.</p></div></div>
                     </div>
 
                     <div class="faq-item">
@@ -1244,7 +1541,7 @@
                             <span>¿Los productos tienen garantía?</span>
                             <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
                         </button>
-                        <div class="faq-panel"><div><p class="faq-answer">Todo producto nuevo incluye 12 meses de garantía por fallas de fabricación, con soporte directo de nuestro equipo técnico en Caracas. Los equipos repotenciados incluyen 6 meses de garantía y se detallan en la ficha de cada artículo.</p></div></div>
+                        <div class="faq-panel"><div><p class="faq-answer">Todo producto nuevo incluye 12 meses de garantía por fallas de fabricación, con soporte directo de nuestro equipo técnico en zulia. Los equipos repotenciados incluyen 6 meses de garantía y se detallan en la ficha de cada artículo.</p></div></div>
                     </div>
 
                     <div class="faq-item">
@@ -1252,7 +1549,7 @@
                             <span>¿Puedo ver el producto antes de comprarlo?</span>
                             <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
                         </button>
-                        <div class="faq-panel"><div><p class="faq-answer">Sí. Agendamos cita presencial en nuestra tienda de Caracas para que veas y pruebes el equipo antes de decidir. Escríbenos por WhatsApp con el nombre del producto y te confirmamos disponibilidad para demo.</p></div></div>
+                        <div class="faq-panel"><div><p class="faq-answer">Sí. Agendamos cita presencial en nuestra tienda de zulia para que veas y pruebes el equipo antes de decidir. Escríbenos por WhatsApp con el nombre del producto y te confirmamos disponibilidad para demo.</p></div></div>
                     </div>
 
                     <div class="faq-item">
@@ -1276,7 +1573,7 @@
     </section>
 
     <!-- Professional Footer -->
-    <footer class="py-12 px-4 sm:px-8 border-t border-purple-100 relative z-20" style="background: linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);">
+    <footer id="ubicacion" class="py-12 px-4 sm:px-8 border-t border-purple-100 relative z-20 scroll-mt-20" style="background: linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
                 <h3 class="text-gray-900 font-bold text-lg mb-2 tracking-wide flex items-center gap-2">
@@ -1284,7 +1581,7 @@
                     GIGAHERTZ STORE
                 </h3>
                 <span class="block w-12 h-1 rounded-full bg-purple-500 mb-3"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Tu tienda de confianza en tecnología, componentes de alta gama y equipos de computación en Caracas y toda Venezuela.</p>
+                <p class="text-xs text-gray-500 leading-relaxed">Tu tienda de confianza en tecnología, componentes de alta gama y equipos de computación en zulia y toda Venezuela.</p>
             </div>
             <div>
                 <h4 class="text-gray-900 font-semibold text-sm mb-3 flex items-center gap-2">
@@ -1319,7 +1616,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
                     Contacto
                 </h4>
-                <p class="text-xs text-gray-500 mb-2">Caracas, Venezuela</p>
+                <p class="text-xs text-gray-500 mb-2">zulia, Venezuela</p>
                 <p class="text-xs text-gray-500 mb-2">Email: <a href="contacto.html" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors">soporte@gigahertzstore.com</a></p>
                 <p class="text-xs text-gray-500">Teléfono: <span class="text-purple-600 font-semibold">+58 (212) 555-GIGA</span></p>
             </div>
@@ -1398,12 +1695,39 @@
         </div>
     </div>
 
+    <!-- Cart Drawer -->
+    <div id="cartDrawer" class="cd-overlay" role="dialog" aria-modal="true" aria-labelledby="cdTitle">
+        <div class="cd-panel">
+            <div class="cd-head">
+                <div>
+                    <h3 id="cdTitle"><span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>Tu carrito</h3>
+                    <span class="cd-count" id="cdCount">0 artículos</span>
+                </div>
+                <button id="cdClose" class="cd-close" type="button" aria-label="Cerrar carrito">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+
+            <div class="cd-list" id="cdList"></div>
+
+            <div class="cd-foot" id="cdFoot" hidden>
+                <div class="cd-totalrow">
+                    <span>Total estimado</span>
+                    <strong id="cdTotal">$0.00</strong>
+                </div>
+                <a class="cd-checkout" href="checkout.html">
+                    Ir a checkout
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <button id="cdKeep" class="cd-keep" type="button">Seguir comprando</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Product Detail Modal -->
     <div id="productModal" class="pm-overlay" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+        <div class="pm-stage">
         <div class="pm-modal" id="pmModal">
-            <button id="pmClose" class="pm-close" type="button" aria-label="Cerrar detalle de producto">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-            </button>
 
             <div class="pm-grid">
                 <div class="pm-media">
@@ -1491,6 +1815,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <button id="pmClose" class="pm-close" type="button" aria-label="Cerrar detalle de producto">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
         </div>
     </div>
 
@@ -2029,15 +2357,15 @@
                 }
                 pmDescText.innerHTML =
                     '<p><strong>' + current.name + '</strong> — ' + current.sub + '. Seleccionado por el equipo técnico de GigaHertz Store y probado en banco de pruebas antes de salir a la venta, garantizando rendimiento estable, temperaturas controladas y compatibilidad verificada con los estándares actuales de la industria.</p>' +
-                    '<p>El producto se entrega nuevo y sellado de fábrica, con su empaque original, manuales, accesorios completos y certificados de cumplimiento. Incluye garantía de 12 meses por fallas de fabricación, asistencia técnica especializada para la instalación y configuración inicial, así como soporte postventa directo por WhatsApp con nuestro personal en Caracas.</p>' +
-                    '<p>GigaHertz Store despacha a domicilio a toda Venezuela: Caracas (24-48h), Valencia y Maracaibo (48-72h) y resto del país de 3 a 5 días hábiles. Aceptamos transferencia bancaria, Pago Móvil, Zelle, tarjetas de crédito y débito, así como pago contra entrega en zonas cubiertas. Consulta disponibilidad exacta, descuentos por cantidad y opciones de financiamiento antes de finalizar tu compra.</p>' +
+                    '<p>El producto se entrega nuevo y sellado de fábrica, con su empaque original, manuales, accesorios completos y certificados de cumplimiento. Incluye garantía de 12 meses por fallas de fabricación, asistencia técnica especializada para la instalación y configuración inicial, así como soporte postventa directo por WhatsApp con nuestro personal en zulia.</p>' +
+                    '<p>GigaHertz Store despacha a domicilio a toda Venezuela: zulia (24-48h), Valencia y Maracaibo (48-72h) y resto del país de 3 a 5 días hábiles. Aceptamos transferencia bancaria, Pago Móvil, Zelle, tarjetas de crédito y débito, así como pago contra entrega en zonas cubiertas. Consulta disponibilidad exacta, descuentos por cantidad y opciones de financiamiento antes de finalizar tu compra.</p>' +
                     '<p>¿Dudas sobre compatibilidad con tu equipo actual? Escríbenos antes de comprar y te asesoramos con la instalación, la actualización de firmware y las mejores alternativas de precio dentro del catálogo de la tienda.</p>';
                 const specs = [
                     ['Modelo', current.name],
                     ['Resumen técnico', current.sub],
                     ['Condición', 'Nuevo · sellado de fábrica'],
                     ['Garantía', '12 meses'],
-                    ['Disponibilidad', 'En stock · Caracas'],
+                    ['Disponibilidad', 'En stock · zulia'],
                     ['Envío', 'A toda Venezuela']
                 ];
                 pmSpecsList.innerHTML = specs.map(([k, v]) => '<div><dt>' + k + '</dt><dd>' + v + '</dd></div>').join('');
@@ -2131,6 +2459,9 @@
             });
 
             pmBuy.addEventListener('click', () => {
+                if (current && window.GigaCart) {
+                    GigaCart.add({ id: current.name, name: current.name, price: current.usd, img: current.img });
+                }
                 pmBuyLabel.textContent = 'Agregado al carrito';
                 clearTimeout(buyTimer);
                 buyTimer = setTimeout(() => { pmBuyLabel.textContent = 'Comprar ahora'; }, 1800);
@@ -2323,6 +2654,150 @@
                 }
             });
         });
+    </script>
+    <!-- Back to top -->
+    <button id="backToTop" class="btt" type="button" aria-label="Volver arriba">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+
+    <script src="cart.js"></script>
+    <script>
+        (function () {
+            const badge = document.getElementById('cartCount');
+            const navCart = document.getElementById('navCart');
+            const drawer = document.getElementById('cartDrawer');
+            const cdList = document.getElementById('cdList');
+            const cdCount = document.getElementById('cdCount');
+            const cdTotal = document.getElementById('cdTotal');
+            const cdFoot = document.getElementById('cdFoot');
+            const cdClose = document.getElementById('cdClose');
+            const cdKeep = document.getElementById('cdKeep');
+            const btt = document.getElementById('backToTop');
+
+            const fmt = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+            function renderBadge() {
+                const c = window.GigaCart ? GigaCart.count() : 0;
+                badge.textContent = c > 99 ? '99+' : String(c);
+                badge.hidden = c === 0;
+            }
+
+            function renderDrawer() {
+                const items = GigaCart.all();
+                const count = GigaCart.count();
+                cdCount.textContent = count === 1 ? '1 artículo' : count + ' artículos';
+
+                if (!items.length) {
+                    cdFoot.hidden = true;
+                    cdList.innerHTML =
+                        '<div class="cd-empty">' +
+                            '<svg class="w-14 h-14 mx-auto text-purple-200" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>' +
+                            '<p>Tu carrito está vacío</p>' +
+                            '<small>Agrega productos desde el catálogo.</small>' +
+                        '</div>';
+                    return;
+                }
+
+                cdList.innerHTML = items.map(item => {
+                    const id = encodeURIComponent(item.id);
+                    return '<div class="cd-item">' +
+                        (item.img ? '<img class="cd-thumb" src="' + esc(item.img) + '" alt="">' : '<div class="cd-thumb"></div>') +
+                        '<div class="cd-main">' +
+                            '<div class="cd-name">' + esc(item.name) + '</div>' +
+                            '<div class="cd-unit">' + fmt(item.price) + ' c/u</div>' +
+                            '<div class="cd-meta">' +
+                                '<span class="qty" data-id="' + id + '">' +
+                                    '<button type="button" data-action="dec" aria-label="Restar">−</button>' +
+                                    '<span>' + item.qty + '</span>' +
+                                    '<button type="button" data-action="inc" aria-label="Sumar">+</button>' +
+                                '</span>' +
+                                '<span class="cd-total-i">' + fmt(item.price * item.qty) + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<button type="button" class="cd-remove" data-action="remove" data-id="' + id + '" aria-label="Quitar producto">' +
+                            '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>' +
+                        '</button>' +
+                    '</div>';
+                }).join('');
+
+                cdFoot.hidden = false;
+                cdTotal.textContent = fmt(GigaCart.total());
+            }
+
+            function openDrawer() {
+                renderDrawer();
+                drawer.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                cdClose.focus({ preventScroll: true });
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('is-open');
+                document.body.style.overflow = '';
+            }
+
+            navCart.addEventListener('click', openDrawer);
+            cdClose.addEventListener('click', closeDrawer);
+            cdKeep.addEventListener('click', closeDrawer);
+            drawer.addEventListener('click', e => {
+                if (e.target === drawer) closeDrawer();
+            });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+            });
+
+            cdList.addEventListener('click', e => {
+                const btn = e.target.closest('button[data-action]');
+                if (!btn) return;
+                const action = btn.dataset.action;
+                const wrap = btn.closest('.qty');
+                const id = decodeURIComponent((wrap ? wrap.dataset.id : btn.dataset.id) || '');
+                if (!id) return;
+                const item = GigaCart.all().find(i => i.id === id);
+                if (!item) return;
+                if (action === 'inc') GigaCart.setQty(id, item.qty + 1);
+                if (action === 'dec') GigaCart.setQty(id, item.qty - 1);
+                if (action === 'remove') GigaCart.remove(id);
+            });
+
+            window.addEventListener('cart:change', () => {
+                renderBadge();
+                renderDrawer();
+            });
+            renderBadge();
+            renderDrawer();
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                const btn = card.querySelector('button[title="Agregar al carrito"]');
+                if (!btn) return;
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const priceEl = [...card.querySelectorAll('span')].find(s => s.textContent.includes('$'));
+                    const imgEl = card.querySelector('img');
+                    const nameEl = card.querySelector('.product-name');
+                    if (!priceEl || !nameEl) return;
+                    GigaCart.add({
+                        id: nameEl.textContent.trim(),
+                        name: nameEl.textContent.trim(),
+                        price: parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')),
+                        img: imgEl ? imgEl.getAttribute('src') : ''
+                    });
+                    badge.classList.remove('pop');
+                    void badge.offsetWidth;
+                    badge.classList.add('pop');
+                });
+            });
+
+            window.addEventListener('scroll', () => {
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                const th = Math.min(450, Math.max(80, max * 0.6));
+                btt.classList.toggle('is-visible', window.scrollY > th);
+            }, { passive: true });
+            btt.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            });
+        })();
     </script>
 </body>
 </html>
