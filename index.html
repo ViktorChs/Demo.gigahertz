@@ -2032,53 +2032,61 @@
             if (e.target === settingsModal) closeModalFunc();
         });
 
-        let soundEnabled = true;
-        let audioCtx = null;
-        let ambientOsc = null;
-        let ambientGain = null;
-
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            if (!ambientOsc && soundEnabled) {
-                ambientOsc = audioCtx.createOscillator();
-                ambientGain = audioCtx.createGain();
-                ambientOsc.type = 'sine';
-                ambientOsc.frequency.setValueAtTime(110, audioCtx.currentTime);
-                ambientGain.gain.setValueAtTime(0.015, audioCtx.currentTime);
-                ambientOsc.connect(ambientGain);
-                ambientGain.connect(audioCtx.destination);
-                ambientOsc.start();
-            }
+        let sfxEnabled = true;
+        const sfxPop = new Audio('Sonido/pop.mp3');
+        sfxPop.volume = 0.45;
+        const sfxHoverSrcs = [
+            'Sonido/danevaer-mechanical-keyboard-typing-brow.wav',
+            'Sonido/danevaer-mechanical-keyboard-typing-brow(1).wav',
+            'Sonido/danevaer-mechanical-keyboard-typing-brow(2).wav',
+            'Sonido/danevaer-mechanical-keyboard-typing-brow(3).wav',
+            'Sonido/danevaer-mechanical-keyboard-typing-brow(4).wav',
+            'Sonido/danevaer-mechanical-keyboard-typing-brown-switches-436103_[cut_0sec].mp3'
+        ];
+        function playPop() {
+            if (!sfxEnabled) return;
+            sfxPop.currentTime = 0;
+            sfxPop.play().catch(() => {});
+        }
+        function playHover() {
+            if (!sfxEnabled) return;
+            const src = sfxHoverSrcs[Math.floor(Math.random() * sfxHoverSrcs.length)];
+            const a = new Audio(src);
+            a.volume = 0.2;
+            a.play().catch(() => {});
         }
 
         const soundToggle = document.getElementById('soundToggle');
         const soundIcon = document.getElementById('soundIcon');
-
         soundToggle.addEventListener('click', () => {
-            soundEnabled = !soundEnabled;
-            if (soundEnabled) {
-                initAudio();
+            sfxEnabled = !sfxEnabled;
+            if (sfxEnabled) {
                 soundIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
                 soundIcon.classList.add('text-purple-600');
                 soundIcon.classList.remove('text-gray-400');
             } else {
-                if (ambientGain && audioCtx) {
-                    ambientGain.gain.setValueAtTime(0, audioCtx.currentTime);
-                }
-                if (ambientOsc) {
-                    try { ambientOsc.stop(); ambientOsc.disconnect(); } catch(e){}
-                    ambientOsc = null;
-                }
                 soundIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
                 soundIcon.classList.remove('text-purple-600');
                 soundIcon.classList.add('text-gray-400');
             }
         });
+
+        const navLinkSel = 'nav a[href^="#"], nav a[href^="catalogo"], nav a[href^="contacto"], .md-links a, .nav-dd-cat';
+        document.querySelectorAll(navLinkSel).forEach(el => {
+            el.addEventListener('mouseenter', playHover);
+        });
+        document.querySelectorAll(navLinkSel + ', #navBurger, #nmClose').forEach(el => {
+            el.addEventListener('click', playPop);
+        });
+        new MutationObserver(muts => {
+            muts.forEach(m => {
+                if (m.attributeName !== 'class') return;
+                const t = m.target;
+                if (t.id === 'productModal' || t.id === 'cartDrawer' || t.id === 'navMenu' || t.classList.contains('pm-overlay') || t.classList.contains('cd-overlay') || t.classList.contains('md-overlay')) {
+                    playPop();
+                }
+            });
+        }).observe(document.body, { attributes: true, attributeFilter: ['class'], subtree: true });
 
         const likeBtn = document.getElementById('likeBtn');
         const likeIcon = document.getElementById('likeIcon');
@@ -2406,12 +2414,6 @@
         }
 
         window.onload = function () {
-            document.body.addEventListener('click', () => {
-                if (soundEnabled && (!audioCtx || audioCtx.state === 'suspended')) {
-                    initAudio();
-                }
-            }, { once: true });
-
             startLoop();
         };
     </script>

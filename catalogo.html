@@ -3912,5 +3912,38 @@
             menu.querySelectorAll('.md-links a').forEach(function (a) { a.addEventListener('click', shut); });
         })();
     </script>
+    <script>
+        (function () {
+            const sfxPop = new Audio('Sonido/pop.mp3');
+            sfxPop.volume = 0.45;
+            const sfxHoverSrcs = [
+                'Sonido/danevaer-mechanical-keyboard-typing-brow.wav',
+                'Sonido/danevaer-mechanical-keyboard-typing-brow(1).wav',
+                'Sonido/danevaer-mechanical-keyboard-typing-brow(2).wav',
+                'Sonido/danevaer-mechanical-keyboard-typing-brow(3).wav',
+                'Sonido/danevaer-mechanical-keyboard-typing-brow(4).wav',
+                'Sonido/danevaer-mechanical-keyboard-typing-brown-switches-436103_[cut_0sec].mp3'
+            ];
+            function playPop() { sfxPop.currentTime = 0; sfxPop.play().catch(() => {}); }
+            function playHover() {
+                const src = sfxHoverSrcs[Math.floor(Math.random() * sfxHoverSrcs.length)];
+                const a = new Audio(src);
+                a.volume = 0.2;
+                a.play().catch(() => {});
+            }
+            const navLinkSel = 'nav a[href^="index"], nav a[href^="catalogo"], nav a[href^="contacto"], .md-links a';
+            document.querySelectorAll(navLinkSel).forEach(el => el.addEventListener('mouseenter', playHover));
+            document.querySelectorAll(navLinkSel + ', #navBurger, #nmClose, #navCart').forEach(el => el.addEventListener('click', playPop));
+            new MutationObserver(muts => {
+                muts.forEach(m => {
+                    if (m.attributeName !== 'class') return;
+                    const t = m.target;
+                    if (t.id === 'productModal' || t.id === 'cartDrawer' || t.id === 'navMenu' || t.classList.contains('pm-overlay') || t.classList.contains('cd-overlay') || t.classList.contains('md-overlay')) {
+                        playPop();
+                    }
+                });
+            }).observe(document.body, { attributes: true, attributeFilter: ['class'], subtree: true });
+        })();
+    </script>
 </body>
 </html>
