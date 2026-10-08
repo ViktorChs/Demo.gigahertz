@@ -646,6 +646,14 @@
             height: 100%;
             overflow: hidden;
         }
+        .pm-media {
+            position: relative;
+            margin: 14px 14px 0;
+            aspect-ratio: 4 / 3;
+            border-radius: 1.1rem;
+            overflow: hidden;
+            background: #f3f4f6;
+        }
         @media (min-width: 640px) {
             .pm-grid {
                 grid-template-columns: 46% minmax(0, 1fr);
@@ -668,14 +676,6 @@
         .pm-info::-webkit-scrollbar { width: 6px; }
         .pm-info::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 999px; }
         .pm-info::-webkit-scrollbar-track { background: transparent; }
-        .pm-media {
-            position: relative;
-            margin: 14px 14px 0;
-            aspect-ratio: 4 / 3;
-            border-radius: 1.1rem;
-            overflow: hidden;
-            background: #f3f4f6;
-        }
         .pm-media img {
             width: 100%;
             height: 100%;
@@ -1640,6 +1640,14 @@
             height: 100%;
             overflow: hidden;
         }
+        .pm-media {
+            position: relative;
+            margin: 14px 14px 0;
+            aspect-ratio: 4 / 3;
+            border-radius: 1.1rem;
+            overflow: hidden;
+            background: #f3f4f6;
+        }
         @media (min-width: 640px) {
             .pm-grid {
                 grid-template-columns: 46% minmax(0, 1fr);
@@ -1662,14 +1670,6 @@
         .pm-info::-webkit-scrollbar { width: 6px; }
         .pm-info::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 999px; }
         .pm-info::-webkit-scrollbar-track { background: transparent; }
-        .pm-media {
-            position: relative;
-            margin: 14px 14px 0;
-            aspect-ratio: 4 / 3;
-            border-radius: 1.1rem;
-            overflow: hidden;
-            background: #f3f4f6;
-        }
         .pm-media img {
             width: 100%;
             height: 100%;
@@ -2005,6 +2005,7 @@
         }
         @media (min-width: 1024px) {
             .cat-layout { grid-template-columns: 280px minmax(0, 1fr); }
+            #crGrid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
         }
         .cf {
             background: rgba(255, 255, 255, 0.94);
@@ -2604,7 +2605,7 @@
                             Filtros
                         </button>
                     </div>
-                    <div class="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6" id="crGrid">
+                    <div class="grid grid-cols-2 gap-3 sm:gap-6" id="crGrid">
 <!-- Product 1 -->
                 <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
