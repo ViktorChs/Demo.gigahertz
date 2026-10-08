@@ -88,23 +88,27 @@
         }
         .product-name {
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             font-weight: 700;
             color: #111827;
-            font-size: 13.5px;
-            line-height: 1.35;
-            min-height: calc(4 * 1.35em);
+            font-size: 12px;
+            line-height: 1.3;
             margin-bottom: 4px;
             overflow-wrap: anywhere;
         }
         .product-sub {
-            font-size: 12px;
+            display: none;
+            font-size: 11px;
             color: #6b7280;
             line-height: 1.4;
             min-height: 1.4em;
             margin-bottom: 8px;
+        }
+        @media (min-width: 768px) {
+            .product-name { font-size: 13.5px; -webkit-line-clamp: 3; }
+            .product-sub { display: block; }
         }
         @keyframes smoothMarquee {
             0% { transform: translateX(0); }
@@ -1078,23 +1082,27 @@
         }
         .product-name {
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             font-weight: 700;
             color: #111827;
-            font-size: 13.5px;
-            line-height: 1.35;
-            min-height: calc(4 * 1.35em);
+            font-size: 12px;
+            line-height: 1.3;
             margin-bottom: 4px;
             overflow-wrap: anywhere;
         }
         .product-sub {
-            font-size: 12px;
+            display: none;
+            font-size: 11px;
             color: #6b7280;
             line-height: 1.4;
             min-height: 1.4em;
             margin-bottom: 8px;
+        }
+        @media (min-width: 768px) {
+            .product-name { font-size: 13.5px; -webkit-line-clamp: 3; }
+            .product-sub { display: block; }
         }
         @keyframes smoothMarquee {
             0% { transform: translateX(0); }
@@ -2509,7 +2517,7 @@
 
 
     <!-- Catalog -->
-    <main class="pt-24 pb-16 px-4 sm:px-8 relative z-10">
+    <main class="pt-24 pb-16 px-0 sm:px-8 relative z-10">
         <div id="cfBackdrop" class="cf-backdrop" aria-hidden="true"></div>
         
 
@@ -2596,11 +2604,11 @@
                             Filtros
                         </button>
                     </div>
-                    <div class="grid grid-cols-2 xl:grid-cols-3 gap-6" id="crGrid">
+                    <div class="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6" id="crGrid">
 <!-- Product 1 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-1.png" alt="Tarjeta Gráfica RTX 4070" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Top Ventas</span>
                         </div>
@@ -2616,9 +2624,9 @@
                 </div>
 
                 <!-- Product 2 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-2.png" alt="Procesador AMD Ryzen 7" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Destacado</span>
                         </div>
@@ -2634,9 +2642,9 @@
                 </div>
 
                 <!-- Product 3 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-3.png" alt="Teclado Mecánico RGB Pro" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Popular</span>
                         </div>
@@ -2652,9 +2660,9 @@
                 </div>
 
                 <!-- Product 4 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-4.png" alt="Monitor Gamer Curvo 27" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Oferta</span>
                         </div>
@@ -2670,9 +2678,9 @@
                 </div>
 
                 <!-- Product 5 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-5.png" alt="Audífonos Gamer 7.1" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Nuevo</span>
                         </div>
@@ -2688,9 +2696,9 @@
                 </div>
 
                 <!-- Product 6 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/ZOTAC_Gaming%27s_GeForce_RTX_50_Series_Graphics_Carda.jpg/500px-ZOTAC_Gaming%27s_GeForce_RTX_50_Series_Graphics_Carda.jpg" alt="RTX 4060 Ti" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Tarjeta Gráfica NVIDIA GeForce RTX 4060 Ti 8GB GDDR6 con DLSS 3 y Ray Tracing</h4>
@@ -2703,9 +2711,9 @@
                 </div>
 
                 <!-- Product 7 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-7.png" alt="Core i7-14700K" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Procesador Intel Core i7-14700K de 20 Núcleos hasta 5.6GHz Socket LGA1700</h4>
@@ -2718,9 +2726,9 @@
                 </div>
 
                 <!-- Product 8 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-8.png" alt="Z790 Motherboard" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Tarjeta Madre ASUS ROG Strix Z790-A Gaming WiFi DDR5 LGA1700 con Wi-Fi 6E</h4>
@@ -2733,9 +2741,9 @@
                 </div>
 
                 <!-- Product 9 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-9.avif" alt="RAM 32GB" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Memoria RAM Corsair Vengeance RGB 32GB DDR5 6000MHz CL30 Kit 2x16GB</h4>
@@ -2748,9 +2756,9 @@
                 </div>
 
                 <!-- Product 10 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg/500px-Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg" alt="SSD 2TB" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">SSD M.2 NVMe Samsung 990 PRO 2TB PCIe 4.0 Lectura hasta 7450 MB/s</h4>
@@ -2763,9 +2771,9 @@
                 </div>
 
                 <!-- Product 11 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-11.png" alt="PSU 850W" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Fuente de Poder Corsair RM850x 850W 80 Plus Gold Totalmente Modular</h4>
@@ -2778,9 +2786,9 @@
                 </div>
 
                 <!-- Product 12 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-12.png" alt="Case Lian Li" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Gabinete Lian Li O11 Dynamic EVO con Vidrio Templado Dual Chamber</h4>
@@ -2793,9 +2801,9 @@
                 </div>
 
                 <!-- Product 13 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-13.webp" alt="Enfriamiento Líquido" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Refrigeración Líquida NZXT Kraken 360 RGB AIO para Procesador</h4>
@@ -2808,9 +2816,9 @@
                 </div>
 
                 <!-- Product 14 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-14.png" alt="Mouse Superlight" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Mouse Inalámbrico Logitech G Pro X Superlight 2 de 63g con Sensor HERO</h4>
@@ -2823,9 +2831,9 @@
                 </div>
 
                 <!-- Product 15 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-15.png" alt="Silla Gamer" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Silla Gamer Secretlab Titan Evo Ergonómica en Cuero PU Talla Regular</h4>
@@ -2838,9 +2846,9 @@
                 </div>
 
                 <!-- Product 16 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Laptops">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Laptops">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-16.png" alt="Laptop Gamer" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Laptop Gamer ASUS ROG Strix G16 Intel Core i7 RTX 4060 Pantalla 16" 240Hz</h4>
@@ -2853,9 +2861,9 @@
                 </div>
 
                 <!-- Product 17 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-17.avif" alt="Monitor 24" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Monitor Gamer 24" AOC 24G2SPE 165Hz IPS FHD 1920x1080 1ms FreeSync</h4>
@@ -2868,9 +2876,9 @@
                 </div>
 
                 <!-- Product 18 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Blue_Yeti_Blackout_USB_microphone_%2851844234538%29.jpg/500px-Blue_Yeti_Blackout_USB_microphone_%2851844234538%29.jpg" alt="QuadCast S" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Micrófono HyperX QuadCast S USB Condensador con RGB y Antipop</h4>
@@ -2883,9 +2891,9 @@
                 </div>
 
                 <!-- Product 19 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-19.png" alt="Control Xbox" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Control Inalámbrico Microsoft Xbox Series X Carbon Black para PC y Consola</h4>
@@ -2898,9 +2906,9 @@
                 </div>
 
                 <!-- Product 20 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Impresión">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Impresión">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-20.png" alt="Router WiFi 6" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Router ASUS RT-AX82U WiFi 6 Gaming con Iluminación AURA RGB</h4>
@@ -2913,9 +2921,9 @@
                 </div>
 
                 <!-- Product 21 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-21.png" alt="UPS 1500VA" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">UPS APC Back-UPS 1500VA de Respaldo Eléctrico Automático con Regulación</h4>
@@ -2928,9 +2936,9 @@
                 </div>
 
                 <!-- Product 22 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-22.png" alt="Webcam C920" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Cámara Web Logitech C920 HD Pro 1080p con Micrófono Estéreo</h4>
@@ -2943,9 +2951,9 @@
                 </div>
 
                 <!-- Product 23 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Impresión">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Impresión">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-23.png" alt="Impresora EcoTank" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Impresora Epson EcoTank L3250 Multifuncional WiFi con Botellas de Tinta</h4>
@@ -2958,9 +2966,9 @@
                 </div>
 
                 <!-- Product 24 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Impresión">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Impresión">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="https://live.staticflickr.com/688/33264146426_fde684e26e_b.jpg" alt="Kit iFixit" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Kit de Herramientas iFixit Pro Tech Toolkit para Reparación de PCs y Laptops</h4>
@@ -2973,9 +2981,9 @@
                 </div>
 
                 <!-- Product 25 -->
-                <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Laptops">
+                <div class="product-card p-3 sm:p-5 flex flex-col justify-between relative group" data-cat="Laptops">
                     <div class="relative z-10">
-                        <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
+                        <div class="w-full h-32 sm:h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
                             <img src="img/p-25.png" alt="Base Cooling" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Base Refrigerante para Laptop RGB 17" con Ventiladores Silenciosos</h4>
