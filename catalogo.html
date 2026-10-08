@@ -638,7 +638,7 @@
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto minmax(0, 1fr);
-            align-items: start;
+            align-items: stretch;
             height: 100%;
             overflow: hidden;
         }
@@ -659,7 +659,11 @@
             overflow-y: auto;
             overscroll-behavior: contain;
             scrollbar-width: thin;
+            scrollbar-color: #d8b4fe transparent;
         }
+        .pm-info::-webkit-scrollbar { width: 6px; }
+        .pm-info::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 999px; }
+        .pm-info::-webkit-scrollbar-track { background: transparent; }
         .pm-media {
             position: relative;
             margin: 14px 14px 0;
@@ -671,7 +675,9 @@
         .pm-media img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 14px;
+            box-sizing: border-box;
             display: block;
         }
         .pm-badge {
@@ -942,16 +948,9 @@
             color: #4b5563;
         }
         .pm-text.is-scroll {
-            max-height: 190px;
-            overflow-y: auto;
-            overscroll-behavior: contain;
-            scrollbar-width: thin;
-            padding-right: 8px;
-            scrollbar-color: #d8b4fe transparent;
+            overflow: visible;
+            padding-right: 0;
         }
-        .pm-text.is-scroll::-webkit-scrollbar { width: 6px; }
-        .pm-text.is-scroll::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 999px; }
-        .pm-text.is-scroll::-webkit-scrollbar-track { background: transparent; }
         .pm-text p { margin: 0 0 10px; }
         .pm-text p:last-child { margin-bottom: 0; }
         .pm-specs { margin: 0; padding-bottom: 6px; }
@@ -978,7 +977,6 @@
             .pm-price { font-size: 1.85rem; }
             .pm-text { font-size: 13.5px; }
             .pm-specs > div { font-size: 13px; padding: 10px 0; }
-            .pm-text.is-scroll { max-height: 240px; }
         }
         @media (hover: hover) and (pointer: fine) {
             .pm-close:hover { background: #ffffff; color: #111827; }
@@ -1630,7 +1628,7 @@
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto minmax(0, 1fr);
-            align-items: start;
+            align-items: stretch;
             height: 100%;
             overflow: hidden;
         }
@@ -1651,7 +1649,11 @@
             overflow-y: auto;
             overscroll-behavior: contain;
             scrollbar-width: thin;
+            scrollbar-color: #d8b4fe transparent;
         }
+        .pm-info::-webkit-scrollbar { width: 6px; }
+        .pm-info::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 999px; }
+        .pm-info::-webkit-scrollbar-track { background: transparent; }
         .pm-media {
             position: relative;
             margin: 14px 14px 0;
@@ -1663,7 +1665,9 @@
         .pm-media img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 14px;
+            box-sizing: border-box;
             display: block;
         }
         .pm-badge {
@@ -1934,16 +1938,9 @@
             color: #4b5563;
         }
         .pm-text.is-scroll {
-            max-height: 190px;
-            overflow-y: auto;
-            overscroll-behavior: contain;
-            scrollbar-width: thin;
-            padding-right: 8px;
-            scrollbar-color: #d8b4fe transparent;
+            overflow: visible;
+            padding-right: 0;
         }
-        .pm-text.is-scroll::-webkit-scrollbar { width: 6px; }
-        .pm-text.is-scroll::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 999px; }
-        .pm-text.is-scroll::-webkit-scrollbar-track { background: transparent; }
         .pm-text p { margin: 0 0 10px; }
         .pm-text p:last-child { margin-bottom: 0; }
         .pm-specs { margin: 0; padding-bottom: 6px; }
@@ -1970,7 +1967,6 @@
             .pm-price { font-size: 1.85rem; }
             .pm-text { font-size: 13.5px; }
             .pm-specs > div { font-size: 13px; padding: 10px 0; }
-            .pm-text.is-scroll { max-height: 240px; }
         }
         @media (hover: hover) and (pointer: fine) {
             .pm-close:hover { background: #ffffff; color: #111827; }
@@ -2259,6 +2255,93 @@
         }
         .cr-search input:focus { outline: none; border-color: #a855f7; box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.15); }
         .cr-search input::placeholder { color: #9ca3af; }
+        .cr-search-row { display: flex; align-items: center; gap: 10px; max-width: 420px; margin: 0 auto 20px; }
+        .cr-search-row .cr-search { flex: 1; min-width: 0; max-width: none; margin: 0; }
+        .cf-sheet-btn {
+            display: none;
+            align-items: center;
+            gap: 7px;
+            flex-shrink: 0;
+            padding: 10px 15px;
+            border: 1px solid #ddd6fe;
+            background: #faf5ff;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            color: #6d28d9;
+            cursor: pointer;
+            transition: background-color 140ms ease, transform 140ms var(--pm-ease-out);
+        }
+        .cf-sheet-btn svg { width: 15px; height: 15px; }
+        .cf-sheet-btn:active { transform: scale(0.96); }
+        .cf-close {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border: 0;
+            background: #f3f4f6;
+            border-radius: 999px;
+            color: #4b5563;
+            cursor: pointer;
+            transition: background-color 140ms ease, transform 140ms var(--pm-ease-out);
+        }
+        .cf-close:hover { background: #e5e7eb; }
+        .cf-close:active { transform: scale(0.95); }
+        @media (max-width: 1023.98px) {
+            .cf-sheet-btn { display: inline-flex; }
+            .cf-close { display: flex; }
+            .cf-backdrop {
+                position: fixed;
+                inset: 0;
+                z-index: 79;
+                background: rgba(17, 24, 39, 0.45);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 220ms var(--pm-ease-out);
+            }
+            .cf-backdrop.is-open { opacity: 1; pointer-events: auto; }
+            /* main (Tailwind z-10) crea stacking-context; con el sheet abierto se
+               eleva por encima del footer (z-20) para que backdrop+sheet cubran
+               toda la pagina; dentro de main el backdrop (79) queda bajo el sheet (80) */
+            body.cf-sheet-open main { z-index: 85; }
+            .cf {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: auto;
+                z-index: 80;
+                width: auto;
+                max-height: min(76vh, 600px);
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                border-radius: 1.5rem 1.5rem 0 0;
+                transform: translateY(101%);
+                visibility: hidden;
+                transition: transform 280ms var(--pm-ease-out), visibility 0s linear 280ms;
+                padding-bottom: calc(20px + env(safe-area-inset-bottom));
+                box-shadow: 0 -18px 50px rgba(17, 24, 39, 0.22);
+            }
+            .cf::before {
+                content: '';
+                display: block;
+                width: 44px;
+                height: 4px;
+                border-radius: 999px;
+                background: #d1d5db;
+                margin: -6px auto 10px;
+            }
+            /* deja que el menu desplegable crezca fuera del sheet sin recortarse */
+            .cf-dd-menu { position: static; display: none; box-shadow: none; border: 0; padding: 6px 0 0; }
+            .cf.is-open {
+                transform: translateY(0);
+                visibility: visible;
+                transition: transform 280ms var(--pm-ease-out), visibility 0s linear 0s;
+            }
+        }
         .cr { scroll-margin-top: 96px; }
         .cr-pag { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 26px; flex-wrap: wrap; }
         .cr-pag[hidden] { display: none; }
@@ -2353,18 +2436,24 @@
 
     <!-- Catalog -->
     <main class="pt-24 pb-16 px-4 sm:px-8 relative z-10">
+        <div id="cfBackdrop" class="cf-backdrop" aria-hidden="true"></div>
         
 
             <div class="cat-layout">
 
                 <!-- Filters (sticky) -->
-                <aside class="cf" aria-label="Filtros de productos">
+                <aside id="cfSheet" class="cf" aria-label="Filtros de productos">
                     <div class="cf-head">
                         <h2 class="cf-title">
                             <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
                             Filtros
                         </h2>
-                        <button type="button" id="cfReset" class="cf-reset">Limpiar</button>
+                        <div class="flex items-center gap-2">
+                            <button type="button" id="cfReset" class="cf-reset">Limpiar</button>
+                            <button type="button" id="cfSheetClose" class="cf-close" title="Cerrar filtros" aria-label="Cerrar filtros">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="cf-group">
@@ -2423,16 +2512,22 @@
                         <h2 class="cr-title">Productos</h2>
                         <span class="cr-count" id="crCount">0 productos</span>
                     </div>
-                    <div class="cr-search">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-                        <input type="search" id="cfSearch" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos">
+                    <div class="cr-search-row">
+                        <div class="cr-search">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                            <input type="search" id="cfSearch" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos">
+                        </div>
+                        <button type="button" id="cfSheetBtn" class="cf-sheet-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="cfSheet">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 4h18l-7 8v6l-4 2v-8L3 4Z"/></svg>
+                            Filtros
+                        </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6" id="crGrid">
 <!-- Product 1 -->
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=RTX+4070" alt="Tarjeta Gráfica RTX 4070" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/2023_Gigabyte_GeForce_RTX_4070_Aero_OC_12GB_%286%29.jpg/500px-2023_Gigabyte_GeForce_RTX_4070_Aero_OC_12GB_%286%29.jpg" alt="Tarjeta Gráfica RTX 4070" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Top Ventas</span>
                         </div>
                         <h4 class="product-name">Tarjeta Gráfica NVIDIA GeForce RTX 4070 Super 12GB GDDR6X Gaming</h4>
@@ -2450,7 +2545,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Ryzen+7" alt="Procesador AMD Ryzen 7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/AMD_Ryzen_7_1800X.jpg/500px-AMD_Ryzen_7_1800X.jpg" alt="Procesador AMD Ryzen 7" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Destacado</span>
                         </div>
                         <h4 class="product-name">Procesador AMD Ryzen 7 7800X3D de 8 Núcleos 16 Hilos hasta 5.0GHz AM5</h4>
@@ -2468,7 +2563,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Teclado+RGB" alt="Teclado Mecánico RGB Pro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Logitech-g910_%2816475940137%29.jpg/500px-Logitech-g910_%2816475940137%29.jpg" alt="Teclado Mecánico RGB Pro" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Popular</span>
                         </div>
                         <h4 class="product-name">Teclado Mecánico Gamer RGB Pro con Switches Red Hot-Swap y RGB por Tecla</h4>
@@ -2486,7 +2581,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Monitor+27" alt="Monitor Gamer Curvo 27" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Computer_Entertainer_5-11.pdf/page1-500px-Computer_Entertainer_5-11.pdf.jpg" alt="Monitor Gamer Curvo 27" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Oferta</span>
                         </div>
                         <h4 class="product-name">Monitor Gamer Curvo 27" Samsung Odyssey G5 180Hz QHD 2560x1440 1ms FreeSync Premium</h4>
@@ -2504,7 +2599,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Audifonos" alt="Audífonos Gamer 7.1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/RGB_gaming_headset_on_desk_with_ambient_lighting.jpg/500px-RGB_gaming_headset_on_desk_with_ambient_lighting.jpg" alt="Audífonos Gamer 7.1" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                             <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Nuevo</span>
                         </div>
                         <h4 class="product-name">Audífonos Gamer 7.1 Surround</h4>
@@ -2522,7 +2617,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=RTX+4060Ti" alt="RTX 4060 Ti" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/ZOTAC_Gaming%27s_GeForce_RTX_50_Series_Graphics_Carda.jpg/500px-ZOTAC_Gaming%27s_GeForce_RTX_50_Series_Graphics_Carda.jpg" alt="RTX 4060 Ti" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Tarjeta Gráfica NVIDIA GeForce RTX 4060 Ti 8GB GDDR6 con DLSS 3 y Ray Tracing</h4>
                         <p class="product-sub">8GB GDDR6 DLSS 3</p>
@@ -2537,7 +2632,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Core+i7" alt="Core i7-14700K" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Intel_i7_8700K.jpg/500px-Intel_i7_8700K.jpg" alt="Core i7-14700K" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Procesador Intel Core i7-14700K de 20 Núcleos hasta 5.6GHz Socket LGA1700</h4>
                         <p class="product-sub">LGA1700 20 Nucleos 5.6GHz</p>
@@ -2552,7 +2647,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Z790+Motherboard" alt="Z790 Motherboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Asus-ROG-Strix-Z390-F-Gaming-Motherboard_20201120_DSC6025.jpg/500px-Asus-ROG-Strix-Z390-F-Gaming-Motherboard_20201120_DSC6025.jpg" alt="Z790 Motherboard" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Tarjeta Madre ASUS ROG Strix Z790-A Gaming WiFi DDR5 LGA1700 con Wi-Fi 6E</h4>
                         <p class="product-sub">DDR5 Wi-Fi 6E LGA1700</p>
@@ -2567,7 +2662,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=RAM+32GB+DDR5" alt="RAM 32GB" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/SK_Hynix_DDR5_form_factors.jpg/500px-SK_Hynix_DDR5_form_factors.jpg" alt="RAM 32GB" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Memoria RAM Corsair Vengeance RGB 32GB DDR5 6000MHz CL30 Kit 2x16GB</h4>
                         <p class="product-sub">Kit 2x16GB 6000MHz CL30</p>
@@ -2582,7 +2677,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=SSD+2TB+NVMe" alt="SSD 2TB" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg/500px-Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg" alt="SSD 2TB" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">SSD M.2 NVMe Samsung 990 PRO 2TB PCIe 4.0 Lectura hasta 7450 MB/s</h4>
                         <p class="product-sub">Lectura hasta 7450 MB/s</p>
@@ -2597,7 +2692,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=PSU+850W" alt="PSU 850W" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Full_modular_ATX_power_supply_unit.jpg/500px-Full_modular_ATX_power_supply_unit.jpg" alt="PSU 850W" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Fuente de Poder Corsair RM850x 850W 80 Plus Gold Totalmente Modular</h4>
                         <p class="product-sub">80 Plus Gold Modular</p>
@@ -2612,7 +2707,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Case+Lian+Li" alt="Case Lian Li" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Lian_Li_PC-O11_Dynamic_20190601.jpg/500px-Lian_Li_PC-O11_Dynamic_20190601.jpg" alt="Case Lian Li" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Gabinete Lian Li O11 Dynamic EVO con Vidrio Templado Dual Chamber</h4>
                         <p class="product-sub">Vidrio Templado Dual Chamber</p>
@@ -2627,7 +2722,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Componentes">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Liquid+Cooler" alt="Enfriamiento Líquido" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/H115i_liquid_cooler.jpg/500px-H115i_liquid_cooler.jpg" alt="Enfriamiento Líquido" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Refrigeración Líquida NZXT Kraken 360 RGB AIO para Procesador</h4>
                         <p class="product-sub">RGB AIO Liquid Cooler</p>
@@ -2642,7 +2737,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Mouse+Superlight" alt="Mouse Superlight" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://live.staticflickr.com/2261/2778794704_1b306d34f1_b.jpg" alt="Mouse Superlight" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Mouse Inalámbrico Logitech G Pro X Superlight 2 de 63g con Sensor HERO</h4>
                         <p class="product-sub">Mouse Inalámbrico 63g</p>
@@ -2657,7 +2752,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Silla+Gamer" alt="Silla Gamer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Gaming_chair_1.jpg/500px-Gaming_chair_1.jpg" alt="Silla Gamer" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Silla Gamer Secretlab Titan Evo Ergonómica en Cuero PU Talla Regular</h4>
                         <p class="product-sub">Ergonómica Cuero PU</p>
@@ -2672,7 +2767,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Laptops">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Laptop+Gamer" alt="Laptop Gamer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/ROG_Strix_G16_2026-08-08_ASUS_01.jpg/500px-ROG_Strix_G16_2026-08-08_ASUS_01.jpg" alt="Laptop Gamer" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Laptop Gamer ASUS ROG Strix G16 Intel Core i7 RTX 4060 Pantalla 16" 240Hz</h4>
                         <p class="product-sub">i7 RTX 4060 16" 240Hz</p>
@@ -2687,7 +2782,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Monitor+24" alt="Monitor 24" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Akaoni_Kou_playing_Street_Fighter_6_with_AOC_PD32M_at_XPG_booth%2C_right_side_20231216.jpg/500px-Akaoni_Kou_playing_Street_Fighter_6_with_AOC_PD32M_at_XPG_booth%2C_right_side_20231216.jpg" alt="Monitor 24" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Monitor Gamer 24" AOC 24G2SPE 165Hz IPS FHD 1920x1080 1ms FreeSync</h4>
                         <p class="product-sub">FHD 1ms FreeSync</p>
@@ -2702,7 +2797,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=QuadCast+S" alt="QuadCast S" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Blue_Yeti_Blackout_USB_microphone_%2851844234538%29.jpg/500px-Blue_Yeti_Blackout_USB_microphone_%2851844234538%29.jpg" alt="QuadCast S" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Micrófono HyperX QuadCast S USB Condensador con RGB y Antipop</h4>
                         <p class="product-sub">USB Condensador RGB</p>
@@ -2717,7 +2812,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Xbox+Controller" alt="Control Xbox" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Black_Xbox_One_X_wireless_controller%2C_3.jpg/500px-Black_Xbox_One_X_wireless_controller%2C_3.jpg" alt="Control Xbox" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Control Inalámbrico Microsoft Xbox Series X Carbon Black para PC y Consola</h4>
                         <p class="product-sub">Carbon Black PC / Console</p>
@@ -2732,7 +2827,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Impresión">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Router+WiFi+6" alt="Router WiFi 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/ASUS_Wi-Fi_Router_%2848767215803%29.jpg/500px-ASUS_Wi-Fi_Router_%2848767215803%29.jpg" alt="Router WiFi 6" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Router ASUS RT-AX82U WiFi 6 Gaming con Iluminación AURA RGB</h4>
                         <p class="product-sub">Gaming Router AURA RGB</p>
@@ -2747,7 +2842,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Computadoras">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=UPS+1500VA" alt="UPS 1500VA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Apc_ups_rs500_01.jpg/500px-Apc_ups_rs500_01.jpg" alt="UPS 1500VA" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">UPS APC Back-UPS 1500VA de Respaldo Eléctrico Automático con Regulación</h4>
                         <p class="product-sub">Respaldo Eléctrico Automático</p>
@@ -2762,7 +2857,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Periféricos">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Webcam+C920" alt="Webcam C920" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://live.staticflickr.com/8293/7490923222_2b750bf684_b.jpg" alt="Webcam C920" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Cámara Web Logitech C920 HD Pro 1080p con Micrófono Estéreo</h4>
                         <p class="product-sub">1080p Streaming & Calls</p>
@@ -2777,7 +2872,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Impresión">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Impresora+EcoTank" alt="Impresora EcoTank" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/EPSON_L1218_Multifunction_ink-jet_Printer.jpg/500px-EPSON_L1218_Multifunction_ink-jet_Printer.jpg" alt="Impresora EcoTank" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Impresora Epson EcoTank L3250 Multifuncional WiFi con Botellas de Tinta</h4>
                         <p class="product-sub">Multifuncional WiFi Botellas</p>
@@ -2792,7 +2887,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Impresión">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=iFixit+Toolkit" alt="Kit iFixit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://live.staticflickr.com/688/33264146426_fde684e26e_b.jpg" alt="Kit iFixit" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Kit de Herramientas iFixit Pro Tech Toolkit para Reparación de PCs y Laptops</h4>
                         <p class="product-sub">Reparación PCs y Laptops</p>
@@ -2807,7 +2902,7 @@
                 <div class="product-card p-5 flex flex-col justify-between relative group" data-cat="Laptops">
                     <div class="relative z-10">
                         <div class="w-full h-44 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden relative">
-                            <img src="https://placehold.co/300x300/f3f4f6/7c3aed?text=Base+Cooling" alt="Base Cooling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Laptop_cooler.JPG/500px-Laptop_cooler.JPG" alt="Base Cooling" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300">
                         </div>
                         <h4 class="product-name">Base Refrigerante para Laptop RGB 17" con Ventiladores Silenciosos</h4>
                         <p class="product-sub">Ventiladores Silenciosos 17"</p>
@@ -3667,6 +3762,45 @@
 
             syncRangeUI();
             apply();
+        })();
+    </script>
+    <script>
+        (function () {
+            var sheet = document.getElementById('cfSheet');
+            var btn = document.getElementById('cfSheetBtn');
+            var closeBtn = document.getElementById('cfSheetClose');
+            var backdrop = document.getElementById('cfBackdrop');
+            if (!sheet || !btn) return;
+            var mq = window.matchMedia('(max-width: 1023.98px)');
+            var lastFocus = null;
+
+            function openSheet() {
+                lastFocus = document.activeElement;
+                sheet.classList.add('is-open');
+                backdrop.classList.add('is-open');
+                document.body.classList.add('cf-sheet-open');
+                btn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+                closeBtn.focus();
+            }
+            function closeSheet(restoreFocus) {
+                sheet.classList.remove('is-open');
+                backdrop.classList.remove('is-open');
+                document.body.classList.remove('cf-sheet-open');
+                btn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                if (restoreFocus !== false && lastFocus) lastFocus.focus();
+            }
+
+            btn.addEventListener('click', openSheet);
+            closeBtn.addEventListener('click', function () { closeSheet(); });
+            backdrop.addEventListener('click', function () { closeSheet(); });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && sheet.classList.contains('is-open')) closeSheet();
+            });
+            mq.addEventListener('change', function () {
+                if (!mq.matches) closeSheet(false);
+            });
         })();
     </script>
     <script src="categorias.js"></script>
